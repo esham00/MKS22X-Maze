@@ -26,18 +26,36 @@ public class Maze{
 
     public Maze(String filename) throws FileNotFoundException{
         //COMPLETE CONSTRUCTOR
-	int j =  0;
+	int x =  0;
+	int temp = 0;
+ 	String a = "";
 	animate = false;
 	File text = new File(filename);
-	Scanner maze = new Scanner(text);
-        while (maze.hasNextLine()) {
-	    String a = maze.NextLines();
-	    for (int i = 0; i < a.length(); i++) {
-		maze[j][i]  = a.charAt(i);
-	    }
+	Scanner mazee = new Scanner(text);
+	 while (mazee.hasNextLine()) {
+	     x++;
+	     mazee.nextLine();
+	 }
+	
+		maze = new char[x][a.length()];
+        // while (temp < x) {
+	//     for (int i = 0; i < a.length(); i++) {
+	// 	maze[temp][i]  = a.charAt(i);
+	//     }
+	//     temp++;
+	//     a = mazee.nextLine();
+	// }
     }
     
-
+    public String toString() {
+	String output = "yikes";
+	for(int i  = 0; i  < maze.length; i++) {
+	    for (int j = 0; j < maze[0].length; j++) {
+		output += maze[i][j];
+	    }
+	}
+	return output;
+    } 
     private void wait(int millis){
          try {
              Thread.sleep(millis);
@@ -71,7 +89,7 @@ public class Maze{
 
     */
     public int solve(){
-
+	return 1;
             //find the location of the S. 
 
 
@@ -117,7 +135,14 @@ public class Maze{
 
         return -1; //so it compiles
     }
-
+    public static void main(String[] args) {
+	try {
+	    Maze a = new Maze("Mazel.txt");
+	    System.out.println(a); }
+	catch (Exception a) {
+	    a.printStackTrace();
+	}
+    }
 
 }
 
