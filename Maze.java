@@ -37,7 +37,8 @@ public class Maze{
 	     x++;
 	     a = mazee.nextLine();
 	 }
-	 maze = new char[x+1][a.length()];
+	 if (x == 0) { throw new IllegalStateExceptions("nope");
+	 maze = new char[x][a.length()];
 	 while (mazee2.hasNextLine()) {
 	     a = mazee2.nextLine();
 	     for (int i =  0; i < a.length(); i++) {
@@ -54,6 +55,7 @@ public class Maze{
 		output += maze[i][j];
 	    }
 	}
+	    output += "\n";
 	return output;
     } 
     private void wait(int millis){
