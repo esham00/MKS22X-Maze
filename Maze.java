@@ -32,23 +32,23 @@ public class Maze{
 	animate = false;
 	File text = new File(filename);
 	Scanner mazee = new Scanner(text);
+	Scanner mazee2 = new Scanner(text);
 	 while (mazee.hasNextLine()) {
 	     x++;
-	     mazee.nextLine();
+	     a = mazee.nextLine();
 	 }
-	
-		maze = new char[x][a.length()];
-        // while (temp < x) {
-	//     for (int i = 0; i < a.length(); i++) {
-	// 	maze[temp][i]  = a.charAt(i);
-	//     }
-	//     temp++;
-	//     a = mazee.nextLine();
-	// }
+	 maze = new char[x+1][a.length()];
+	 while (mazee2.hasNextLine()) {
+	     a = mazee2.nextLine();
+	     for (int i =  0; i < a.length(); i++) {
+		 maze[temp][i]  = a.charAt(i);
+	     }
+	     temp++;
+	 }
     }
     
     public String toString() {
-	String output = "yikes";
+	String output = "";
 	for(int i  = 0; i  < maze.length; i++) {
 	    for (int j = 0; j < maze[0].length; j++) {
 		output += maze[i][j];
