@@ -6,23 +6,6 @@ public class Maze{
     private char[][]maze;
     private boolean animate;//false by default
     private int startX, startY, endX, endY;
-    /*Constructor loads a maze text file, and sets animate to false by default.
-
-      1. The file contains a rectangular ascii maze, made with the following 4 characters:
-      '#' - Walls - locations that cannot be moved onto
-      ' ' - Empty Space - locations that can be moved onto
-      'E' - the location of the goal (exactly 1 per file)
-
-      'S' - the location of the start(exactly 1 per file)
-
-      2. The maze has a border of '#' around the edges. So you don't have to check for out of bounds!
-
-
-      3. When the file is not found OR the file is invalid (not exactly 1 E and 1 S) then: 
-
-         throw a FileNotFoundException or IllegalStateException
-
-    */
 
     public Maze(String filename) throws FileNotFoundException{
         //COMPLETE CONSTRUCTOR
@@ -57,6 +40,9 @@ public class Maze{
 		     endY = j;
 		 }
 	     }
+	 }
+	 if (startX == null || startY == null || endX == null || endY == null) {
+	     throw new IllegalStateException("You must have a start and end");
 	 }
     }
     
@@ -95,12 +81,6 @@ public class Maze{
 
 
 
-    /*Wrapper Solve Function returns the helper function
-
-      Note the helper function has the same name, but different parameters.
-      Since the constructor exits when the file is not found or is missing an E or S, we can assume it exists.
-
-    */
     public int solve(){
 	//erase the S
 	maze[startX][startY] = ' ';
@@ -108,23 +88,6 @@ public class Maze{
 	return solve(startX, startY, 0);
     }
 
-    /*
-      Recursive Solve function:
-
-      A solved maze has a path marked with '@' from S to E.
-
-      Returns the number of @ symbols from S to E when the maze is solved,
-      Returns -1 when the maze has no solution.
-
-
-      Postcondition:
-
-      The S is replaced with '@' but the 'E' is not.
-
-      All visited spots that were not part of the solution are changed to '.'
-
-      All visited spots that are part of the solution are changed to '@'
-    */
     private int solve(int row, int col, int number){ //you can add more parameters since this is private
         //automatic animation! You are welcome.
         if(animate){
@@ -152,23 +115,23 @@ public class Maze{
 	    return -1; //so it compiles
 	}
     }
-    public static void main(String[] args) {
-	try {
-	    Maze a = new Maze("Mazel.txt");
-	    Maze b = new Maze("data1.dat");
-	    Maze c = new Maze("data2.dat");
-	    Maze d = new Maze("data3.dat");
-	    a.solve();
-	    b.solve();
-	    c.solve();
-	    d.solve();
-	    System.out.println(a);
-	    System.out.println(b + "/n" + c + "/n" + d);
-	}
-	catch (Exception a) {
-	    a.printStackTrace();
-	}
-    }
+    // public static void main(String[] args) {
+    // 	try {
+    // 	    Maze a = new Maze("Mazel.txt");
+    // 	    Maze b = new Maze("data1.dat");
+    // 	    Maze c = new Maze("data2.dat");
+    // 	    Maze d = new Maze("data3.dat");
+    // 	    a.solve();
+    // 	    b.solve();
+    // 	    c.solve();
+    // 	    d.solve();
+    // 	    System.out.println(a);
+    // 	    System.out.println(b + "/n" + c + "/n" + d);
+    // 	}
+    // 	catch (Exception a) {
+    // 	    a.printStackTrace();
+    // 	}
+    // }
 
 }
 
