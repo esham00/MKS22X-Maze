@@ -145,21 +145,22 @@ public class Maze{
 	    return -1; //so it compiles
 	}
     }
-    public static void main(String[] args) {
-    	try {
-    	    Maze a = new Maze("Mazel.txt");
-    	    Maze b = new Maze("data1.dat");
-    	    Maze c = new Maze("data2.dat");
-    	    Maze d = new Maze("data3.dat");
-    	    System.out.println(a.solve());
-    	    b.solve();
-    	    c.solve();
-    	    d.solve();
-    	}
-    	catch (Exception a) {
-    	    a.printStackTrace();
-    	}
-    }
+    // public static void main(String[] args) {
+    // 	try {
+    // 	    Maze a = new Maze("Mazel.txt");
+    // 	    Maze b = new Maze("data1.dat");
+    // 	    Maze c = new Maze("data2.dat");
+    // 	    Maze d = new Maze("data3.dat");
+    // 	    System.out.println(a.solve());
+    // 	    System.out.println(a);
+    // 	    b.solve();
+    // 	    c.solve();
+    // 	    d.solve();
+    // 	}
+    // 	catch (Exception a) {
+    // 	    a.printStackTrace();
+    // 	}
+    // }
 
 }
 
