@@ -48,7 +48,6 @@ public class Maze{
 	 }
 	 for(int i = 0; i < maze.length; i++) {
 	     for (int j = 0; j < maze[0].length; j++) {
-		 maze[i][j] = ' ';
 		 if (maze[i][j] == 'S') {
 		     startX = i;
 		     startY = j;
