@@ -5,7 +5,7 @@ public class Maze{
 
     private char[][]maze;
     private boolean animate;//false by default
-
+    private int startX, startY, endX, endY;
     /*Constructor loads a maze text file, and sets animate to false by default.
 
       1. The file contains a rectangular ascii maze, made with the following 4 characters:
@@ -46,6 +46,19 @@ public class Maze{
 	     }
 	     temp++;
 	 }
+	 for(int i = 0; i < maze.length; i++) {
+	     for (int j = 0; j < maze[0].length; j++) {
+		 maze[i][j] = ' ';
+		 if (maze[i][j] == 'S') {
+		     startX = i;
+		     startY = j;
+		 }
+		 if (maze[i][j] == 'E') {
+		     endX = i;
+		     endY = j;
+		 }
+	     }
+	 }
     }
     
     public String toString() {
@@ -77,7 +90,6 @@ public class Maze{
     public void clearTerminal(){
 
         //erase terminal, go to top left of screen.
-
         System.out.println("\033[2J\033[1;1H");
 
     }
@@ -91,17 +103,10 @@ public class Maze{
 
     */
     public int solve(){
-	return 1;
-            //find the location of the S. 
-
-
-            //erase the S
-
-
-            //and start solving at the location of the s.
-
-            //return solve(???,???);
-
+	//erase the S
+	maze[startX][startY] = ' ';
+	//and start solving at the location of the s.
+	return solve(startX, startY, 0);
     }
 
     /*
@@ -115,15 +120,13 @@ public class Maze{
 
       Postcondition:
 
-        The S is replaced with '@' but the 'E' is not.
+      The S is replaced with '@' but the 'E' is not.
 
-        All visited spots that were not part of the solution are changed to '.'
+      All visited spots that were not part of the solution are changed to '.'
 
-        All visited spots that are part of the solution are changed to '@'
+      All visited spots that are part of the solution are changed to '@'
     */
-    private int solve(int row, int col){ //you can add more parameters since this is private
-
-
+    private int solve(int row, int col, int number){ //you can add more parameters since this is private
         //automatic animation! You are welcome.
         if(animate){
 
@@ -134,13 +137,28 @@ public class Maze{
         }
 
         //COMPLETE SOLVE
-
-        return -1; //so it compiles
+	if (row == endX && col == endY) {
+	    return number;
+	} else {
+	    if (row < maze.length && col < maze[0].length && row >= 0 && col >= 0 && maze[row][col] == ' ') {
+		maze[row][col] = '@';
+		if (solve(row+1, col, number+1) > 0||
+		    solve(row, col+1, number+1) > 0||
+		    solve(row-1, col, number+1) > 0||
+		    solve(row, col-1, number+1) > 0) {
+		    return number;
+		}
+		maze[row][col] = '.';
+	    }
+	    return -1; //so it compiles
+	}
     }
     public static void main(String[] args) {
 	try {
 	    Maze a = new Maze("Mazel.txt");
-	    System.out.println(a); }
+	    a.solve();
+	    System.out.println(a);
+	}
 	catch (Exception a) {
 	    a.printStackTrace();
 	}
