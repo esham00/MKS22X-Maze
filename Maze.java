@@ -37,7 +37,7 @@ public class Maze{
 	     x++;
 	     a = mazee.nextLine();
 	 }
-	 if (x == 0) { throw new IllegalStateExceptions("nope");
+	 if (x == 0 || a.length() == 0) { throw new IllegalStateException("there might be extra enter spaces in your maze or no maze at all in your text file");}
 	 maze = new char[x][a.length()];
 	 while (mazee2.hasNextLine()) {
 	     a = mazee2.nextLine();
@@ -54,8 +54,8 @@ public class Maze{
 	    for (int j = 0; j < maze[0].length; j++) {
 		output += maze[i][j];
 	    }
+	output += "\n";
 	}
-	    output += "\n";
 	return output;
     } 
     private void wait(int millis){
