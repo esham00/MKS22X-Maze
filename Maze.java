@@ -100,7 +100,16 @@ public class Maze{
 	//erase the S
 	maze[startX][startY] = ' ';
 	//and start solving at the location of the s.
-	return solve(startX, startY, 0);
+	solve(startX, startY, 0);
+	int num = 0;
+	for(int i = 0; i < maze.length; i++) {
+	    for(int y = 0; y < maze[0].length; y++) {
+		if (maze[i][y] == '@') {
+		    num++;
+		}
+	    }
+	}
+	return num;
     }
 
     //helper
