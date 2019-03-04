@@ -9,19 +9,27 @@ public class Maze{
 
     public Maze(String filename) throws FileNotFoundException{
         //COMPLETE CONSTRUCTOR
+	//used to see the length of the maze
 	int x =  0;
+	//used to add the characters to the maze
 	int temp = 0;
+	//getting the width of the maze as well as adding the characters to the maze
  	String a = "";
 	animate = false;
+	//scanning file
 	File text = new File(filename);
 	Scanner mazee = new Scanner(text);
 	Scanner mazee2 = new Scanner(text);
+	//used to initialize the maze array
 	 while (mazee.hasNextLine()) {
 	     x++;
 	     a = mazee.nextLine();
 	 }
+	 //if the width or length is 0 or you entered too much so the space at the ends are too long & there is no width for the ends
 	 if (x == 0 || a.length() == 0) { throw new IllegalStateException("there might be extra enter spaces in your maze or no maze at all in your text file");}
+	 //initializing the maze
 	 maze = new char[x][a.length()];
+	 //inputting the characters onto the maze
 	 while (mazee2.hasNextLine()) {
 	     a = mazee2.nextLine();
 	     for (int i =  0; i < a.length(); i++) {
@@ -29,6 +37,7 @@ public class Maze{
 	     }
 	     temp++;
 	 }
+	 //finding the start and end
 	 for(int i = 0; i < maze.length; i++) {
 	     for (int j = 0; j < maze[0].length; j++) {
 		 if (maze[i][j] == 'S') {
@@ -41,18 +50,21 @@ public class Maze{
 		 }
 	     }
 	 }
+	 //if there is not start or end then throw an exception
 	 if (startX == null || startY == null || endX == null || endY == null) {
 	     throw new IllegalStateException("You must have a start and end");
 	 }
     }
-    
+    //printing out the maze
     public String toString() {
 	String output = "";
+	//go through the maze
 	for(int i  = 0; i  < maze.length; i++) {
 	    for (int j = 0; j < maze[0].length; j++) {
 		output += maze[i][j];
 	    }
-	output += "\n";
+	    //new line since it's a rectangle 
+	    output += "\n";
 	}
 	return output;
     } 
@@ -88,6 +100,7 @@ public class Maze{
 	return solve(startX, startY, 0);
     }
 
+    //helper
     private int solve(int row, int col, int number){ //you can add more parameters since this is private
         //automatic animation! You are welcome.
         if(animate){
@@ -99,17 +112,22 @@ public class Maze{
         }
 
         //COMPLETE SOLVE
+	//base case: if they reached the end
 	if (row == endX && col == endY) {
 	    return number;
 	} else {
+	    //if they haven't check if row or col is out of bounds and whether or not you can move there (if it isn't a wall and hasn't be traced already)
 	    if (row < maze.length && col < maze[0].length && row >= 0 && col >= 0 && maze[row][col] == ' ') {
+		//if you can go onto that square put a @
 		maze[row][col] = '@';
+		//solve for the rest up down left right
 		if (solve(row+1, col, number+1) > 0||
 		    solve(row, col+1, number+1) > 0||
 		    solve(row-1, col, number+1) > 0||
 		    solve(row, col-1, number+1) > 0) {
 		    return number;
 		}
+		//if it failed to solve, put a dot to indicate you've been there
 		maze[row][col] = '.';
 	    }
 	    return -1; //so it compiles
