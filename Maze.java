@@ -5,7 +5,10 @@ public class Maze{
 
     private char[][]maze;
     private boolean animate;//false by default
-    private int startX, startY, endX, endY;
+    private int startX = -1;
+    private int startY = -1;
+    private int endX = -1;
+    private int endY = -1;
 
     public Maze(String filename) throws FileNotFoundException{
         //COMPLETE CONSTRUCTOR
@@ -51,7 +54,7 @@ public class Maze{
 	     }
 	 }
 	 //if there is not start or end then throw an exception
-	 if (startX == null || startY == null || endX == null || endY == null) {
+	 if (startX == -1 || startY == -1 || endX == -1 || endY == -1) {
 	     throw new IllegalStateException("You must have a start and end");
 	 }
     }
@@ -133,23 +136,21 @@ public class Maze{
 	    return -1; //so it compiles
 	}
     }
-    // public static void main(String[] args) {
-    // 	try {
-    // 	    Maze a = new Maze("Mazel.txt");
-    // 	    Maze b = new Maze("data1.dat");
-    // 	    Maze c = new Maze("data2.dat");
-    // 	    Maze d = new Maze("data3.dat");
-    // 	    a.solve();
-    // 	    b.solve();
-    // 	    c.solve();
-    // 	    d.solve();
-    // 	    System.out.println(a);
-    // 	    System.out.println(b + "/n" + c + "/n" + d);
-    // 	}
-    // 	catch (Exception a) {
-    // 	    a.printStackTrace();
-    // 	}
-    // }
+    public static void main(String[] args) {
+    	try {
+    	    Maze a = new Maze("Mazel.txt");
+    	    Maze b = new Maze("data1.dat");
+    	    Maze c = new Maze("data2.dat");
+    	    Maze d = new Maze("data3.dat");
+    	    System.out.println(a.solve());
+    	    b.solve();
+    	    c.solve();
+    	    d.solve();
+    	}
+    	catch (Exception a) {
+    	    a.printStackTrace();
+    	}
+    }
 
 }
 
