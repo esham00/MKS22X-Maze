@@ -155,8 +155,15 @@ public class Maze{
     public static void main(String[] args) {
 	try {
 	    Maze a = new Maze("Mazel.txt");
+	    Maze b = new Maze("data1.dat");
+	    Maze c = new Maze("data2.dat");
+	    Maze d = new Maze("data3.dat");
 	    a.solve();
+	    b.solve();
+	    c.solve();
+	    d.solve();
 	    System.out.println(a);
+	    System.out.println(b + "/n" + c + "/n" + d);
 	}
 	catch (Exception a) {
 	    a.printStackTrace();
